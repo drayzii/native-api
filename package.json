@@ -4,10 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "build": "rm -rf ./src/dist && babel ./src/. --out-dir ./src/dist --copy-files",
     "migrate": "sequelize db:migrate --env production",
-    "migrate:dev": "sequelize db:migrate --env development",
-    "start": "npm run migrate && node index.js",
-    "dev": "nodemon index.js",
+    "migrate-dev": "sequelize db:migrate --env development",
+    "start": "npm run build && node ./src/dist/index.js",
+    "dev": "nodemon --exec babel-node src/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -22,6 +23,7 @@
   },
   "homepage": "https://github.com/drayzii/node-setup#readme",
   "dependencies": {
+    "@babel/polyfill": "^7.6.0",
     "dotenv": "^8.1.0",
     "express": "^4.17.1",
     "nodemon": "^1.19.3",

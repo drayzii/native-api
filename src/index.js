@@ -1,4 +1,5 @@
 /* eslint-disable no-console */
+import '@babel/polyfill';
 import express from 'express';
 
 const app = express();

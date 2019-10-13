@@ -1,4 +1,4 @@
-# Native Rwanda NodeJS Backend App template
+# Native Rwanda NodeJS App template
 
 Template of a NodeJS-Express-Postgres-Sequelize app
 
@@ -36,7 +36,9 @@ git clone {your repo link here}
 cd {repo-name}
 ```
 
-Install sequelize and eslint globally
+- Add ESLint extension in VS Code
+
+- Install sequelize and eslint globally
 
 ```
 npm install eslint -g
@@ -46,23 +48,23 @@ npm install eslint -g
 npm install sequelize -g
 ```
 
-Then install all project dependencies
+- Then install all project dependencies
 
 ```
 npm install
 ```
 
-Add a `.env` file to store all our variables.
+- Add a `.env` file to store all our variables.
 ```
 touch .env
 ```
-Add a database url link to this variable in the `.env` file
+- Add a postgres database url link to this variable in the `.env` file
 
 ```
 DEV_DATABASE_URL=
 ```
 
-Run the app with the command 
+- Run the app with the command 
 ```
 npm run dev
 ```

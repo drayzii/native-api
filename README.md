@@ -1,10 +1,40 @@
-# node-setup
-
-## Description
+# Native Rwanda NodeJS Backend App template
 
 Template of a NodeJS-Express-Postgres-Sequelize app
 
 ## Setup
+
+- Create your repo
+
+- Follow the following instructions to make it a copy of this one
+```
+// Make a bare clone of the repo
+
+git clone --bare https://github.com/drayzii/node-setup.git
+
+// Move to the created temporary local repo
+
+cd node-setup.git
+
+// Mirror push to new repository
+
+git push --mirror {your repo link here}
+
+cd ..
+
+// Remove our temporary local repository
+
+rm -rf node-setup.git  
+```
+
+- Change the default branch to develop. Go to your repo, settings, then branches.
+
+- Clone your repo
+
+```
+git clone {your repo link here}
+cd {repo-name}
+```
 
 Install sequelize and eslint globally
 

@@ -1,4 +1,4 @@
-# Native Rwanda NodeJS App template
+# Template
 
 Template of a NodeJS-Express-Postgres-Sequelize app
 

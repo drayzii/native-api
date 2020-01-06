@@ -4,7 +4,7 @@ import decodeToken from '../middlewares/decodeToken';
 
 const router = new Router();
 
-router.get('/my-profile', decodeToken, user.getMyProfile);
+router.get('/me', decodeToken, user.getMyProfile);
 router.put('/upsert', decodeToken, user.upsertProfile);
 router.get('/:user', user.getProfile);
 

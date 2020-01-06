@@ -30,4 +30,19 @@ export default class UserControllers {
       return next(error.message || error);
     }
   }
+
+  static async getProfile(req, res, next) {
+    try {
+      const username = req.params.user.replace('-', '_');
+      const profile = await UserServices.getUser(username.toUpperCase());
+      return response(res,
+        profile ? 200 : 404,
+        profile ? 'Profile retrieved' : 'No profile',
+        profile,
+        profile ? null : 'Not Found',
+      );
+    } catch (error) {
+      return next(error.message || error);
+    }
+  }
 }

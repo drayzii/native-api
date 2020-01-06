@@ -3,22 +3,18 @@ import '@babel/polyfill';
 import express from 'express';
 import bodyParser from 'body-parser';
 import cors from 'cors';
+import routes from './routes';
 
 const app = express();
 
 app.enable('trust proxy');
-app.use(cors());
 
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
+app.use(
+  cors(),
+  bodyParser.urlencoded({ extended: false }),
+  bodyParser.json(),
+);
 
-app.get('/', (req, res) => {
-  res.status(200).json({
-    status: 200,
-    message: 'NodeJS - Express - Postgres - Sequelize App Template',
-  });
-});
+app.use('/', routes);
 
-const PORT = process.env.PORT || 3000;
-
-app.listen(PORT, () => console.log(`Listening on ${PORT}`));
+app.listen(process.env.PORT || 3000, () => console.log('🚀 Server running...'));

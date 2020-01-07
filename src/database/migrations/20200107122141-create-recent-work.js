@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 module.exports = {
-  up: (queryInterface, Sequelize) => queryInterface.createTable('Posts', {
+  up: (queryInterface, Sequelize) => queryInterface.createTable('RecentWorks', {
     id: {
       allowNull: false,
       autoIncrement: true,
@@ -22,9 +22,6 @@ module.exports = {
     field: {
       type: Sequelize.STRING,
     },
-    user: {
-      type: Sequelize.STRING,
-    },
     createdAt: {
       allowNull: false,
       type: Sequelize.DATE,
@@ -34,5 +31,5 @@ module.exports = {
       type: Sequelize.DATE,
     },
   }),
-  down: (queryInterface, Sequelize) => queryInterface.dropTable('Posts'),
+  down: (queryInterface, Sequelize) => queryInterface.dropTable('RecentWorks'),
 };

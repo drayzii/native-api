@@ -4,25 +4,25 @@ export default {
     'Fields',
     [
       {
-        name: 'Web',
+        name: 'WEB',
         admin: 'JONATHAN_SHYAKA',
         createdAt: new Date(),
         updatedAt: new Date(),
       },
       {
-        name: 'Designs',
+        name: 'DESIGNS',
         admin: 'JONATHAN_SHYAKA',
         createdAt: new Date(),
         updatedAt: new Date(),
       },
       {
-        name: 'Images',
+        name: 'IMAGES',
         admin: 'JONATHAN_SHYAKA',
         createdAt: new Date(),
         updatedAt: new Date(),
       },
       {
-        name: 'Music',
+        name: 'MUSIC',
         admin: 'JONATHAN_SHYAKA',
         createdAt: new Date(),
         updatedAt: new Date(),

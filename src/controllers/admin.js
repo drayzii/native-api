@@ -60,4 +60,19 @@ export default class AdminControllers {
       return next(error.message || error);
     }
   }
+
+  static async changeFieldAdmin(req, res, next) {
+    try {
+      const { username: uname } = req.user;
+      if (uname !== 'JONATHAN_SHYAKA') {
+        return response(res, 403, 'You don\'t have access to do that action', null, 'Forbidden');
+      }
+      const { username } = req.body;
+      const { field: name } = req.query;
+      const field = await AdminServices.updateFieldOwner(name, username);
+      return response(res, 200, 'Admin updated', field[1][0], null);
+    } catch (error) {
+      return next(error.message || error);
+    }
+  }
 }

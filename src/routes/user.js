@@ -14,5 +14,6 @@ router.get('/:user', user.getProfile);
 router.get('/', decodeToken, admin.getUsers);
 router.post('/add', decodeToken, admin.addUser);
 router.delete('/delete', decodeToken, admin.deleteUser);
+router.patch('/make-admin', decodeToken, admin.changeFieldAdmin);
 
 export default router;

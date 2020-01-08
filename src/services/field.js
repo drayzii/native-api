@@ -8,3 +8,14 @@ export const checkIfAdmin = (name, admin) => {
     throw error;
   }
 };
+
+export const getFields = (admin) => {
+  try {
+    return db.Field.findAll({
+      where: { admin },
+      attributes: ['name'],
+    });
+  } catch (error) {
+    throw error;
+  }
+};

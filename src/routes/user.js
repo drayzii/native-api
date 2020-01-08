@@ -9,4 +9,8 @@ router.patch('/me/update-password', decodeToken, user.updatePassword);
 router.put('/upsert', decodeToken, user.upsertProfile);
 router.get('/:user', user.getProfile);
 
+// Admin
+router.get('/', decodeToken, user.getUsers);
+router.post('/add-user', decodeToken, user.addUser);
+
 export default router;

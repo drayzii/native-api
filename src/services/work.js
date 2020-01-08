@@ -15,6 +15,14 @@ export default class RecentWorkServices {
     }
   }
 
+  static async getSpecificWork(id) {
+    try {
+      return RecentWork.findOne({ where: { id } });
+    } catch (error) {
+      throw error;
+    }
+  }
+
   static async addRecentWork(work) {
     try {
       return RecentWork.create(work);

@@ -34,4 +34,14 @@ export default class UserControllers {
       return next(error.message || error);
     }
   }
+
+  static async getSpecificWork(req, res, next) {
+    try {
+      const { id } = req.params;
+      const work = await RecentWorkServices.getSpecificWork(id);
+      return response(res, 200, 'Work Retrieved', work, null);
+    } catch (error) {
+      return next(error.message || error);
+    }
+  }
 }

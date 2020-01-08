@@ -6,5 +6,6 @@ const router = new Router();
 
 router.post('/add', decodeToken, work.addRecentWork);
 router.get('/', work.getRecentWorks);
+router.get('/:id', work.getSpecificWork);
 
 export default router;

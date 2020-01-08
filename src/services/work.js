@@ -41,4 +41,12 @@ export default class RecentWorkServices {
       throw error;
     }
   }
+
+  static async delete(id) {
+    try {
+      return RecentWork.destroy({ where: { id } });
+    } catch (error) {
+      throw error;
+    }
+  }
 }

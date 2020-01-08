@@ -69,4 +69,26 @@ export default class UserControllers {
       return next(error.message || error);
     }
   }
+
+  static async delete(req, res, next) {
+    try {
+      const { id } = req.params;
+      const { username } = req.user;
+      const work = await RecentWorkServices.getOne(id);
+      if (!work) {
+        return response(res, 404, 'Sorry, we couldn\'t find the project on our server', null, 'Not Found');
+      }
+      const isAllowed = await checkIfAdmin(work.field, username);
+      const deleted = isAllowed ? await RecentWorkServices.delete(id) : null;
+      return response(
+        res,
+        deleted ? 200 : 403,
+        deleted ? 'Project deleted' : 'You don\'t have access to do that action',
+        null,
+        deleted ? null : 'Forbidden',
+      );
+    } catch (error) {
+      return next(error.message || error);
+    }
+  }
 }

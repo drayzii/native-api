@@ -42,4 +42,23 @@ export default class UserControllers {
       return next(error.message || error);
     }
   }
+
+  static async update(req, res, next) {
+    try {
+      const { id } = req.params;
+      const { username } = req.user;
+      const post = await PostServices.getOne(id);
+      const isAllowed = post.user === username;
+      const updatedPost = isAllowed ? await PostServices.update(id, req.body) : null;
+      return response(
+        res,
+        updatedPost ? 201 : 403,
+        updatedPost ? 'Project Updated' : 'You don\'t have access to do that action',
+        updatedPost ? updatedPost[1][0] : null,
+        updatedPost ? null : 'Forbidden',
+      );
+    } catch (error) {
+      return next(error.message || error);
+    }
+  }
 }

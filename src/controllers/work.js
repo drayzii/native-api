@@ -62,7 +62,7 @@ export default class UserControllers {
         res,
         work ? 201 : 403,
         work ? 'Project Updated' : 'You don\'t have access to do that action',
-        work[1][0],
+        work ? work[1][0] : null,
         work ? null : 'Forbidden',
       );
     } catch (error) {

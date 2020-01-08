@@ -30,4 +30,15 @@ export default class PostServices {
       throw error;
     }
   }
+
+  static async update(id, post) {
+    try {
+      return Post.update(post, {
+        where: { id },
+        returning: true,
+      });
+    } catch (error) {
+      throw error;
+    }
+  }
 }

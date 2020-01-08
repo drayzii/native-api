@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-module.exports = (sequelize, DataTypes) => {
+export default (sequelize, DataTypes) => {
   const Field = sequelize.define('Field', {
     name: DataTypes.STRING,
     admin: DataTypes.STRING,

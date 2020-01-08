@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-module.exports = (sequelize, DataTypes) => {
+export default (sequelize, DataTypes) => {
   const Post = sequelize.define('RecentWork', {
     title: DataTypes.STRING,
     description: DataTypes.STRING,

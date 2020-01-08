@@ -31,5 +31,5 @@ export default {
     {},
   ),
 
-  down: (queryInterface, Sequelize) => queryInterface.bulkDelete('Locations', null, {}),
+  down: (queryInterface, Sequelize) => queryInterface.bulkDelete('Fields', null, {}),
 };

@@ -1,16 +1,16 @@
 /* eslint-disable no-unused-vars */
 export default {
-  up: (queryInterface, Sequelize) => queryInterface.createTable('Fields', {
+  up: (queryInterface, Sequelize) => queryInterface.createTable('Auths', {
     id: {
       allowNull: false,
       autoIncrement: true,
       primaryKey: true,
       type: Sequelize.INTEGER,
     },
-    name: {
+    username: {
       type: Sequelize.STRING,
     },
-    admin: {
+    password: {
       type: Sequelize.STRING,
     },
     createdAt: {
@@ -22,5 +22,5 @@ export default {
       type: Sequelize.DATE,
     },
   }),
-  down: (queryInterface, Sequelize) => queryInterface.dropTable('Fields'),
+  down: (queryInterface, Sequelize) => queryInterface.dropTable('Auths'),
 };

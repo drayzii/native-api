@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import user from '../controllers/user';
+import admin from '../controllers/admin';
 import decodeToken from '../middlewares/decodeToken';
 
 const router = new Router();
@@ -10,8 +11,8 @@ router.put('/upsert', decodeToken, user.upsertProfile);
 router.get('/:user', user.getProfile);
 
 // Admin
-router.get('/', decodeToken, user.getUsers);
-router.post('/add-user', decodeToken, user.addUser);
-router.delete('/delete', decodeToken, user.deleteUser);
+router.get('/', decodeToken, admin.getUsers);
+router.post('/add', decodeToken, admin.addUser);
+router.delete('/delete', decodeToken, admin.deleteUser);
 
 export default router;

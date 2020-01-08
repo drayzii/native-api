@@ -6,5 +6,6 @@ const router = new Router();
 
 router.post('/create', decodeToken, post.addPost);
 router.get('/', post.getUserPosts);
+router.get('/:id', post.getOne);
 
 export default router;

@@ -26,4 +26,20 @@ export default class UserControllers {
       return next(error.message || error);
     }
   }
+
+  static async getOne(req, res, next) {
+    try {
+      const { id } = req.params;
+      const post = await PostServices.getOne(id);
+      return response(
+        res,
+        post ? 200 : 404,
+        post ? 'Post Retrieved' : 'Sorry, we couldn\'t find the requested data on our server',
+        post,
+        post ? null : 'Not found',
+      );
+    } catch (error) {
+      return next(error.message || error);
+    }
+  }
 }

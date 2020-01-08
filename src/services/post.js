@@ -15,6 +15,14 @@ export default class PostServices {
     }
   }
 
+  static async getOne(id) {
+    try {
+      return Post.findOne({ where: { id } });
+    } catch (error) {
+      throw error;
+    }
+  }
+
   static async addPost(post) {
     try {
       return Post.create(post);

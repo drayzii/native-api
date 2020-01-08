@@ -4,8 +4,9 @@ import decodeToken from '../middlewares/decodeToken';
 
 const router = new Router();
 
-router.post('/add', decodeToken, work.addRecentWork);
-router.get('/', work.getRecentWorks);
-router.get('/:id', work.getSpecificWork);
+router.post('/add', decodeToken, work.add);
+router.get('/', work.getByField);
+router.get('/:id', work.getOne);
+router.patch('/:id', decodeToken, work.update);
 
 export default router;

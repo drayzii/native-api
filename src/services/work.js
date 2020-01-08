@@ -2,7 +2,7 @@ import db from '../database/models';
 
 const { RecentWork } = db;
 export default class RecentWorkServices {
-  static async getRecentWorks(field) {
+  static async getByField(field) {
     try {
       return RecentWork.findAll({
         where: { field },
@@ -15,7 +15,7 @@ export default class RecentWorkServices {
     }
   }
 
-  static async getSpecificWork(id) {
+  static async getOne(id) {
     try {
       return RecentWork.findOne({ where: { id } });
     } catch (error) {
@@ -23,9 +23,20 @@ export default class RecentWorkServices {
     }
   }
 
-  static async addRecentWork(work) {
+  static async add(work) {
     try {
       return RecentWork.create(work);
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  static async update(id, work) {
+    try {
+      return RecentWork.update(work, {
+        where: { id },
+        returning: true,
+      });
     } catch (error) {
       throw error;
     }

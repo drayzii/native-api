@@ -2,7 +2,7 @@ import db from '../database/models';
 
 const { Post } = db;
 export default class PostServices {
-  static async getPosts(user) {
+  static async getByUser(user) {
     try {
       return Post.findAll({
         where: { user },
@@ -23,7 +23,7 @@ export default class PostServices {
     }
   }
 
-  static async addPost(post) {
+  static async add(post) {
     try {
       return Post.create(post);
     } catch (error) {
@@ -37,6 +37,14 @@ export default class PostServices {
         where: { id },
         returning: true,
       });
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  static async delete(id) {
+    try {
+      return Post.destroy({ where: { id } });
     } catch (error) {
       throw error;
     }

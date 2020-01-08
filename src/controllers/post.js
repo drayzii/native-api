@@ -6,21 +6,21 @@ import PostServices from '../services/post';
 dotenv.config();
 
 export default class UserControllers {
-  static async addPost(req, res, next) {
+  static async add(req, res, next) {
     try {
       const { username } = req.user;
       const payload = { ...req.body, user: username };
-      const post = await PostServices.addPost(payload);
+      const post = await PostServices.add(payload);
       return response(res, 201, 'Post Added', post, null);
     } catch (error) {
       return next(error.message || error);
     }
   }
 
-  static async getUserPosts(req, res, next) {
+  static async getByUser(req, res, next) {
     try {
       const username = req.query.by.replace('-', '_');
-      const posts = await PostServices.getPosts(username.toUpperCase());
+      const posts = await PostServices.getByUser(username.toUpperCase());
       return response(res, 200, 'Posts Retrieved', posts, null);
     } catch (error) {
       return next(error.message || error);
@@ -48,6 +48,9 @@ export default class UserControllers {
       const { id } = req.params;
       const { username } = req.user;
       const post = await PostServices.getOne(id);
+      if (!post) {
+        return response(res, 404, 'Sorry, we couldn\'t find the post on our server', null, 'Not Found');
+      }
       const isAllowed = post.user === username;
       const updatedPost = isAllowed ? await PostServices.update(id, req.body) : null;
       return response(
@@ -56,6 +59,28 @@ export default class UserControllers {
         updatedPost ? 'Project Updated' : 'You don\'t have access to do that action',
         updatedPost ? updatedPost[1][0] : null,
         updatedPost ? null : 'Forbidden',
+      );
+    } catch (error) {
+      return next(error.message || error);
+    }
+  }
+
+  static async delete(req, res, next) {
+    try {
+      const { id } = req.params;
+      const { username } = req.user;
+      const post = await PostServices.getOne(id);
+      if (!post) {
+        return response(res, 404, 'Sorry, we couldn\'t find the post on our server', null, 'Not Found');
+      }
+      const isAllowed = post.user === username;
+      const deleted = isAllowed ? await PostServices.delete(id) : null;
+      return response(
+        res,
+        deleted ? 200 : 403,
+        deleted ? 'Post deleted' : 'You don\'t have access to do that action',
+        null,
+        deleted ? null : 'Forbidden',
       );
     } catch (error) {
       return next(error.message || error);

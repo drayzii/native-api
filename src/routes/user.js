@@ -12,5 +12,6 @@ router.get('/:user', user.getProfile);
 // Admin
 router.get('/', decodeToken, user.getUsers);
 router.post('/add-user', decodeToken, user.addUser);
+router.delete('/delete', decodeToken, user.deleteUser);
 
 export default router;

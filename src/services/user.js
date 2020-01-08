@@ -50,4 +50,12 @@ export default class UserServices {
       throw error;
     }
   }
+
+  static async deleteUser(username) {
+    try {
+      return Auth.destroy({ where: { username } });
+    } catch (error) {
+      throw error;
+    }
+  }
 }

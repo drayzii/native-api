@@ -98,4 +98,19 @@ export default class UserControllers {
       return next(error.message || error);
     }
   }
+
+  static async deleteUser(req, res, next) {
+    try {
+      const { username: uname } = req.user;
+      const { username } = req.query;
+      if (uname !== 'JONATHAN_SHYAKA') {
+        return response(res, 403, 'You don\'t have access to do that action', null, 'Forbidden');
+      }
+      const deletedUser = await UserServices.deleteUser(username);
+      if (!deletedUser) throw Error('Delete Failed');
+      return response(res, 200, 'User successfully deleted', null, null);
+    } catch (error) {
+      return next(error.message || error);
+    }
+  }
 }

@@ -19,6 +19,7 @@ export default async (req, res, next) => {
       const data = {
         token: sign({ username, email }),
         adminOf,
+        superAdmin: username === 'JONATHAN_SHYAKA',
       };
       return response(res, 200, 'Logged in Successfully', data, null);
     }

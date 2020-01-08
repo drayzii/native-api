@@ -1,6 +1,7 @@
 /* eslint-disable function-paren-newline */
 import dotenv from 'dotenv';
 import response from '../helpers/response';
+import { generate } from '../helpers/bcrypt';
 import UserServices from '../services/user';
 
 dotenv.config();
@@ -41,6 +42,17 @@ export default class UserControllers {
         profile,
         profile ? null : 'Not Found',
       );
+    } catch (error) {
+      return next(error.message || error);
+    }
+  }
+
+  static async updatePassword(req, res, next) {
+    try {
+      const { username } = req.user;
+      const hashedPassword = await generate(req.body.password);
+      const user = await UserServices.updatePassword(username, hashedPassword);
+      return response(res, 200, 'Password updated', user[1][0], null);
     } catch (error) {
       return next(error.message || error);
     }

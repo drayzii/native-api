@@ -1,9 +1,9 @@
 import dotenv from 'dotenv';
 import response from '../helpers/response';
 import { sign } from '../helpers/jwt';
-import bcrypt from '../helpers/bcrypt';
+import { check } from '../helpers/bcrypt';
 import { getFields } from '../services/field';
-import AuthServices from '../services/auth';
+import authService from '../services/auth';
 
 dotenv.config();
 
@@ -12,8 +12,8 @@ export default async (req, res, next) => {
     const { email, password } = req.body;
     const names = email.split('@')[0];
     const username = names.toUpperCase().replace('.', '_');
-    const user = await AuthServices.getUser(username);
-    const passwordMatch = await bcrypt.check(user.password, password);
+    const user = await authService(username);
+    const passwordMatch = check(user.password, password);
     if (passwordMatch) {
       const adminOf = await getFields(username).map(({ name }) => name);
       const data = {

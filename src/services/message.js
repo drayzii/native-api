@@ -9,3 +9,11 @@ export const add = (message) => {
     throw error;
   }
 };
+
+export const get = (to) => {
+  try {
+    return Message.findAll({ where: { to } });
+  } catch (error) {
+    throw error;
+  }
+};

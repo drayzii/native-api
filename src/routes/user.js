@@ -9,6 +9,7 @@ router.get('/me', decodeToken, user.getMyProfile);
 router.put('/me/upsert', decodeToken, user.upsertProfile);
 router.patch('/me/update-password', decodeToken, user.updatePassword);
 router.put('/me/social-link', decodeToken, user.editSocialLinks);
+router.delete('/me/social-link', decodeToken, user.deleteSocialLink);
 router.get('/:user', user.getProfile);
 
 // Admin

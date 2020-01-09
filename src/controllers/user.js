@@ -9,7 +9,9 @@ dotenv.config();
 export default class UserControllers {
   static async getMyProfile(req, res, next) {
     try {
-      const profile = await UserServices.getUser(req.user.username);
+      const { username } = req.user;
+      const profile = await UserServices.getUser(username);
+      if (profile) profile.dataValues.socialLinks = await UserServices.getSocialLinks(username);
       return response(res,
         profile ? 200 : 404,
         profile ? 'Profile retrieved' : 'No profile',
@@ -63,6 +65,17 @@ export default class UserControllers {
       const { username } = req.user;
       const socialLink = await UserServices.upsertSocialLinks(username, req.body);
       return response(res, 201, 'Links updated', socialLink, null);
+    } catch (error) {
+      return next(error.message || error);
+    }
+  }
+
+  static async deleteSocialLink(req, res, next) {
+    try {
+      const { username } = req.user;
+      const deleted = await UserServices.deleteSocialLink(username, req.query.type);
+      if (!deleted) throw Error('Failed to delete');
+      return response(res, 201, 'Link deleted', null, null);
     } catch (error) {
       return next(error.message || error);
     }

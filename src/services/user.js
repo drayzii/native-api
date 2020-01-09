@@ -46,4 +46,23 @@ export default class UserServices {
       throw error;
     }
   }
+
+  static async getSocialLinks(user) {
+    try {
+      return SocialLink.findAll({
+        where: { user },
+        attributes: ['type', 'link'],
+      });
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  static async deleteSocialLink(user, type) {
+    try {
+      return SocialLink.destroy({ where: { user, type } });
+    } catch (error) {
+      throw error;
+    }
+  }
 }

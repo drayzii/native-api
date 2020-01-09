@@ -57,4 +57,14 @@ export default class UserControllers {
       return next(error.message || error);
     }
   }
+
+  static async editSocialLinks(req, res, next) {
+    try {
+      const { username } = req.user;
+      const socialLink = await UserServices.upsertSocialLinks(username, req.body);
+      return response(res, 201, 'Links updated', socialLink, null);
+    } catch (error) {
+      return next(error.message || error);
+    }
+  }
 }

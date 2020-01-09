@@ -1,6 +1,6 @@
 import db from '../database/models';
 
-const { User, Auth } = db;
+const { User, Auth, SocialLink } = db;
 export default class UserServices {
   static async getUser(username) {
     try {
@@ -28,6 +28,20 @@ export default class UserServices {
   static async updatePassword(username, password) {
     try {
       return Auth.update({ password }, { where: { username }, returning: true });
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  static async upsertSocialLinks(user, socialLink) {
+    try {
+      const { type, link } = socialLink;
+      return SocialLink
+        .findOne({ where: { user, type } })
+        .then((obj) => {
+          if (obj) return obj.update({ link });
+          return SocialLink.create({ user, ...socialLink });
+        });
     } catch (error) {
       throw error;
     }

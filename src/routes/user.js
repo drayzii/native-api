@@ -6,8 +6,9 @@ import decodeToken from '../middlewares/decodeToken';
 const router = new Router();
 
 router.get('/me', decodeToken, user.getMyProfile);
+router.put('/me/upsert', decodeToken, user.upsertProfile);
 router.patch('/me/update-password', decodeToken, user.updatePassword);
-router.put('/upsert', decodeToken, user.upsertProfile);
+router.put('/me/social-link', decodeToken, user.editSocialLinks);
 router.get('/:user', user.getProfile);
 
 // Admin

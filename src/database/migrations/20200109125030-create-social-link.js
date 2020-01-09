@@ -1,28 +1,19 @@
 /* eslint-disable no-unused-vars */
 export default {
-  up: (queryInterface, Sequelize) => queryInterface.createTable('Messages', {
+  up: (queryInterface, Sequelize) => queryInterface.createTable('SocialLinks', {
     id: {
       allowNull: false,
       autoIncrement: true,
       primaryKey: true,
       type: Sequelize.INTEGER,
     },
-    names: {
-      type: Sequelize.STRING,
-    },
-    email: {
+    user: {
       type: Sequelize.STRING,
     },
     type: {
       type: Sequelize.STRING,
     },
-    to: {
-      type: Sequelize.STRING,
-    },
-    subject: {
-      type: Sequelize.STRING,
-    },
-    description: {
+    link: {
       type: Sequelize.STRING,
     },
     createdAt: {
@@ -34,5 +25,5 @@ export default {
       type: Sequelize.DATE,
     },
   }),
-  down: (queryInterface, Sequelize) => queryInterface.dropTable('Messages'),
+  down: (queryInterface, Sequelize) => queryInterface.dropTable('SocialLinks'),
 };

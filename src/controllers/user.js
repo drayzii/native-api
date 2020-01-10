@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 import response from '../helpers/response';
 import { generate } from '../helpers/bcrypt';
 import UserServices from '../services/user';
+import getSkills from '../services/skill';
 
 dotenv.config();
 
@@ -12,6 +13,7 @@ export default class UserControllers {
       const { username } = req.user;
       const profile = await UserServices.getUser(username);
       if (profile) profile.dataValues.socialLinks = await UserServices.getSocialLinks(username);
+      if (profile) profile.dataValues.skills = await getSkills(profile.dataValues.skills.split(','));
       return response(res,
         profile ? 200 : 404,
         profile ? 'Profile retrieved' : 'No profile',

@@ -8,6 +8,7 @@ export default (sequelize, DataTypes) => {
     username: DataTypes.STRING,
     email: DataTypes.STRING,
     bio: DataTypes.STRING,
+    skills: DataTypes.STRING,
   }, {});
   User.associate = (models) => {
     // associations can be defined here

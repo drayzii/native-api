@@ -14,10 +14,6 @@ const capitalize = (string) => {
 export default class AdminControllers {
   static async getUsers(req, res, next) {
     try {
-      const { username: uname } = req.user;
-      if (uname !== 'JONATHAN_SHYAKA') {
-        return response(res, 403, 'You don\'t have access to do that action', null, 'Forbidden');
-      }
       const result = await AdminServices.getUsers();
       const users = result.map(({ username }) => ({
         username,
@@ -31,10 +27,6 @@ export default class AdminControllers {
 
   static async addUser(req, res, next) {
     try {
-      const { username: uname } = req.user;
-      if (uname !== 'JONATHAN_SHYAKA') {
-        return response(res, 403, 'You don\'t have access to do that action', null, 'Forbidden');
-      }
       const { email, password: unHashed } = req.body;
       const names = email.split('@')[0];
       const username = names.toUpperCase().replace('.', '_');
@@ -48,11 +40,7 @@ export default class AdminControllers {
 
   static async deleteUser(req, res, next) {
     try {
-      const { username: uname } = req.user;
       const { username } = req.query;
-      if (uname !== 'JONATHAN_SHYAKA') {
-        return response(res, 403, 'You don\'t have access to do that action', null, 'Forbidden');
-      }
       const deletedUser = await AdminServices.deleteUser(username);
       if (!deletedUser) throw Error('Delete Failed');
       return response(res, 200, 'User successfully deleted', null, null);
@@ -63,10 +51,6 @@ export default class AdminControllers {
 
   static async changeFieldAdmin(req, res, next) {
     try {
-      const { username: uname } = req.user;
-      if (uname !== 'JONATHAN_SHYAKA') {
-        return response(res, 403, 'You don\'t have access to do that action', null, 'Forbidden');
-      }
       const { username } = req.body;
       const { field: name } = req.query;
       const field = await AdminServices.updateFieldOwner(name, username);
@@ -78,10 +62,6 @@ export default class AdminControllers {
 
   static async addSkill(req, res, next) {
     try {
-      const { username: uname } = req.user;
-      if (uname !== 'JONATHAN_SHYAKA') {
-        return response(res, 403, 'You don\'t have access to do that action', null, 'Forbidden');
-      }
       const skill = await await AdminServices.addSkill(req.body);
       return response(res, 201, 'Skill added!', skill, null);
     } catch (error) {
@@ -91,11 +71,7 @@ export default class AdminControllers {
 
   static async deleteSkill(req, res, next) {
     try {
-      const { username: uname } = req.user;
       const { skill } = req.query;
-      if (uname !== 'JONATHAN_SHYAKA') {
-        return response(res, 403, 'You don\'t have access to do that action', null, 'Forbidden');
-      }
       const deletedSkill = await AdminServices.deleteSkill(skill);
       if (!deletedSkill) throw Error('Delete Failed');
       return response(res, 200, 'Skill successfully deleted', null, null);

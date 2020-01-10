@@ -2,6 +2,7 @@ import { Router } from 'express';
 import user from '../controllers/user';
 import admin from '../controllers/admin';
 import decodeToken from '../middlewares/decodeToken';
+import isAdmin from '../middlewares/isAdmin';
 
 const router = new Router();
 
@@ -13,9 +14,9 @@ router.delete('/me/social-link', decodeToken, user.deleteSocialLink);
 router.get('/:user', user.getProfile);
 
 // Admin
-router.get('/', decodeToken, admin.getUsers);
-router.post('/add', decodeToken, admin.addUser);
-router.delete('/delete', decodeToken, admin.deleteUser);
-router.patch('/make-admin', decodeToken, admin.changeFieldAdmin);
+router.get('/', decodeToken, isAdmin, admin.getUsers);
+router.post('/add', decodeToken, isAdmin, admin.addUser);
+router.delete('/delete', decodeToken, isAdmin, admin.deleteUser);
+router.patch('/make-admin', decodeToken, isAdmin, admin.changeFieldAdmin);
 
 export default router;

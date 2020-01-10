@@ -20,7 +20,7 @@ export default class UserControllers {
   static async getByUser(req, res, next) {
     try {
       const username = req.query.by.replace('-', '_');
-      const posts = await PostServices.getByUser(username.toUpperCase());
+      const posts = await PostServices.getByUser(username.toUpperCase(), req.query);
       return response(res, 200, 'Posts Retrieved', posts, null);
     } catch (error) {
       return next(error.message || error);

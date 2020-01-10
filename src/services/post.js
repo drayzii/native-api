@@ -2,10 +2,10 @@ import db from '../database/models';
 
 const { Post } = db;
 export default class PostServices {
-  static async getByUser(user) {
+  static async getByUser(user, query) {
     try {
       return Post.findAll({
-        where: { user },
+        where: { user, ...query },
         order: [
           ['createdAt', 'DESC'],
         ],

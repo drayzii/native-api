@@ -75,4 +75,32 @@ export default class AdminControllers {
       return next(error.message || error);
     }
   }
+
+  static async addSkill(req, res, next) {
+    try {
+      const { username: uname } = req.user;
+      if (uname !== 'JONATHAN_SHYAKA') {
+        return response(res, 403, 'You don\'t have access to do that action', null, 'Forbidden');
+      }
+      const skill = await await AdminServices.addSkill(req.body);
+      return response(res, 201, 'Skill added!', skill, null);
+    } catch (error) {
+      return next(error.message || error);
+    }
+  }
+
+  static async deleteSkill(req, res, next) {
+    try {
+      const { username: uname } = req.user;
+      const { skill } = req.query;
+      if (uname !== 'JONATHAN_SHYAKA') {
+        return response(res, 403, 'You don\'t have access to do that action', null, 'Forbidden');
+      }
+      const deletedSkill = await AdminServices.deleteSkill(skill);
+      if (!deletedSkill) throw Error('Delete Failed');
+      return response(res, 200, 'Skill successfully deleted', null, null);
+    } catch (error) {
+      return next(error.message || error);
+    }
+  }
 }

@@ -1,6 +1,6 @@
 import db from '../database/models';
 
-const { Auth, Field } = db;
+const { Auth, Field, Skill } = db;
 export default class UserServices {
   static async addUser(user) {
     try {
@@ -29,6 +29,22 @@ export default class UserServices {
   static async updateFieldOwner(name, admin) {
     try {
       return Field.update({ admin }, { where: { name }, returning: true });
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  static async addSkill(skill) {
+    try {
+      return Skill.create(skill);
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  static async deleteSkill(identifier) {
+    try {
+      return Skill.destroy({ where: { identifier } });
     } catch (error) {
       throw error;
     }
